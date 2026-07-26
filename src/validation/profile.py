@@ -14,6 +14,9 @@ def validate_gender(gender: str) -> str:
 
 
 def validate_birth_date(birth_date: date) -> date:
+    if birth_date.year < 1900:
+        raise ValueError("Invalid birth date - year must be greater than 1900.")
+
     today = date.today()
     age = (
         today.year
