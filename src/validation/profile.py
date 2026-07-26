@@ -16,16 +16,20 @@ def validate_gender(gender: str) -> str:
 
 def validate_birth_date(birth_date: date) -> date:
     today = date.today()
-    age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
-    
+    age = (
+        today.year
+        - birth_date.year
+        - ((today.month, today.day) < (birth_date.month, birth_date.day))
+    )
+
     if age < 18:
         raise ValueError("You must be at least 18 years old to register.")
     return birth_date
 
 
 def validate_name(name: str):
-    if re.search(r'^[A-Za-z]*$', name) is None:
-        raise ValueError(f'{name} contains non-english letters')
+    if re.search(r"^[A-Za-z]*$", name) is None:
+        raise ValueError(f"{name} contains non-english letters")
 
 
 def validate_image(avatar: UploadFile) -> None:

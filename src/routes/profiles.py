@@ -97,7 +97,9 @@ async def create_user_profile(
             detail="User already has a profile.",
         )
 
-    extension = (profile_data.avatar.filename or "avatar.jpg").rsplit(".", 1)[-1].lower()
+    extension = (
+        (profile_data.avatar.filename or "avatar.jpg").rsplit(".", 1)[-1].lower()
+    )
     avatar_key = f"avatars/{user_id}_avatar.{extension}"
     avatar_bytes = await profile_data.avatar.read()
 
