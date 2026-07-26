@@ -7,15 +7,19 @@ from fastapi import UploadFile
 from database.models.accounts import GenderEnum
 
 
-def validate_gender(gender: str):
+def validate_gender(gender: str) -> str:
+    valid_genders = [item.value for item in GenderEnum]
+    if gender not in valid_genders:
+        raise ValueError(f"Invalid gender. Must be one of: {valid_genders}")
+    return gender
+
+
+def validate_birth_date(birth_date: date) -> date:
+    today = date.today()
+    age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
     
-    pass
-
-
-from datetime import date
-
-def validate_birth_date(birth_date: date):
-    
+    if age < 18:
+        raise ValueError("You must be at least 18 years old to register.")
     return birth_date
 
 
