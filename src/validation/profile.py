@@ -1,7 +1,6 @@
 import re
 from datetime import date
 
-
 from fastapi import UploadFile
 
 from database.models.accounts import GenderEnum
@@ -16,7 +15,8 @@ def validate_gender(gender: str) -> str:
 
 def validate_birth_date(birth_date: date) -> date:
     today = date.today()
-    age = (today.year
+    age = (
+        today.year
         - birth_date.year
         - ((today.month, today.day) < (birth_date.month, birth_date.day))
     )
