@@ -65,7 +65,7 @@ async def create_user_profile(
         .where(UserModel.id == authenticated_user_id)
     )
     result = await db.execute(stmt)
-    target_user = result.scalars().first()
+    authenticated_user = result.scalars().first()
 
     if authenticated_user is None or not authenticated_user.is_active:
         raise HTTPException(
