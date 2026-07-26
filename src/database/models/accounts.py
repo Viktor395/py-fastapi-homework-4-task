@@ -97,6 +97,8 @@ class UserModel(Base):
         )
 
     def has_group(self, group_name: UserGroupEnum) -> bool:
+        if self.group is None:
+            return False
         return self.group.name == group_name
 
     @classmethod
